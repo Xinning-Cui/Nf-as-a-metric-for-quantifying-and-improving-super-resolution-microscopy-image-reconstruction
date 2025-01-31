@@ -1,10 +1,19 @@
 # Nf-as-a-metric-for-quantifying-and-improving-super-resolution-microscopy-image-reconstruction
 We trained a Conditional **Variational Diffusion Model (CVDM)** (G. Della Maggiora, 2023) using the **BioSR dataset** (Qiao & Li, 2020) (DOI: 10.6084/m9.figshare.13264793.v9). To evaluate if the model can generate natural images similar to the gtound truth, we assessed the **Naturalness Factor**(Gong, Y., & Sbalzarini, I. F. 2014) at two stages: prior learning (before training) and post-processing (after applying the model's output enhancements). 
 
-The model is trained for 10 epochs with a batch size of 2. Overall, the model is trained for 500,000 iterations, with generation time step T = 200, learning rate 0.0001. 
-During theinference, generation time steps are set to T = 500. The naturalization of images is donewith the ImageJ Mosaic Suite plugin. 
 The implementation of CVDM can be found on the GitHub page (G. Della Maggiora, L. A. Croquevielle, N. Deshpande, H. Horsley, T. Heinis, A. Yaki-movich, Conditional variational diffusion models, https://github.com/casus/cvdm)2023. 
+The naturalization of images is done with the ImageJ Mosaic Suite plugin. 
 The Naturalness Factor information and documentation (including a guide on installation of the Mosaic Suite plugin) can be found in  MOSAIC group, MosaicSuite documentation, https://sbalzarinilab.org/MosaicSuiteDoc/index.html.
+
+## How are experiments done?
+
+**CVDM**:The CVDM model is trained for 10 epochs with a batch size of 2. Overall, the model is trained for 500,000 iterations, with generation time step T = 200, learning rate 0.0001. 
+During theinference, generation time steps are set to T = 500. 
+
+**CVDM+N**: naturalize the output of the CVDM model using ImageJ Mosaic Suite plugin.
+
+**NCVDM**: train a new CVDM model on pairs of low-resolution and naturalized high-resolution BioSR images using the same training dataset and training parameters of CVDM. 
+
 
 ## How to use the images?
 
@@ -43,6 +52,7 @@ To calculate **NCVDM experiment metrics**:
 
 - Use images from the **naturalized_BioSR_high_resolution_images** folder and the **NCVDM_inference** folder as pairs to compute **MS-SSIM, MAE, and PSNR**.
 - Use images from the **NCVDM_inference** folder to compute **RMS Contrast** and **Naturalness Factor**.
+
 
 
 
