@@ -1,19 +1,19 @@
 # Nf-as-a-metric-for-quantifying-and-improving-super-resolution-microscopy-image-reconstruction
-We trained a Conditional **Variational Diffusion Model (CVDM)** (G. Della Maggiora, 2023) using the **BioSR dataset** (Qiao & Li, 2020) (DOI: 10.6084/m9.figshare.13264793.v9). To evaluate if the model can generate natural images similar to the gtound truth, we assessed the **Naturalness Factor**(Gong, Y., & Sbalzarini, I. F. 2014) at two stages: prior learning (before training) and post-processing (after applying the model's output enhancements). 
+We trained a Conditional **Variational Diffusion Model (CVDM)** (G. Della Maggiora, 2023) using the **BioSR dataset** (Qiao & Li, 2020) (DOI: 10.6084/m9.figshare.13264793.v9). To evaluate if the model can generate natural images similar to the ground truth, we assessed the **Naturalness Factor**(Gong, Y., & Sbalzarini, I. F. 2014) at two stages: prior learning (before training) and post-processing (after applying the model's output enhancements). 
 
 The implementation of CVDM can be found on the GitHub page (G. Della Maggiora, L. A. Croquevielle, N. Deshpande, H. Horsley, T. Heinis, A. Yaki-movich, Conditional variational diffusion models, https://github.com/casus/cvdm)2023. 
 The naturalization of images is done with the ImageJ Mosaic Suite plugin. 
 The Naturalness Factor information and documentation (including a guide on installation of the Mosaic Suite plugin) can be found in  MOSAIC group, MosaicSuite documentation, https://sbalzarinilab.org/MosaicSuiteDoc/index.html.
 
 ## How are experiments done?
+We used the publicly available implementation of CVDM (G. Della Maggiora, 2023). **CVDM** and **NCVDM** were independently trained on the same number of pairs of low-resolution and (naturalized for NCVDM) high-resolution BioSR images using the same training parameters. 
 
-**CVDM**:The CVDM model is trained for 10 epochs with a batch size of 2. Overall, the model is trained for 500,000 iterations, with generation time step T = 200, learning rate 0.0001. 
-During theinference, generation time steps are set to T = 500. 
+Both the **CVDM** and **NCVDM** models were trained on 101,880 BioSR image pairs for 500,000 iterations with batch size 2, generation time step T = 200, and a learning rate of 0.0001. 
+For each model, training took 50 hours on a workstation equipped with two Nvidia RTX 3090 GPUs, with a combined total of 48\,GB of GPU memory, and a dual-socket Intel Xeon CPU with 20 physical cores and 40 threads.
+
+For inference, generation time steps were set to T = 500, and the batch size was 4. 
 
 **CVDM+N**: naturalize the output of the CVDM model using ImageJ Mosaic Suite plugin.
-
-**NCVDM**: train a new CVDM model on pairs of low-resolution and naturalized high-resolution BioSR images using the same training dataset and training parameters of CVDM. 
-
 
 ## How to use the images?
 
